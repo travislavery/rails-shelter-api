@@ -1,0 +1,2 @@
+class ShelterItem < ApplicationRecord
+end
