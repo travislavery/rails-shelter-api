@@ -1,9 +1,9 @@
 class V1::ShelterItemsController < ApplicationController
-	def update
+	def create
 		@shelter_item = ShelterItem.find_or_initialize_by(shelter_id: params[:shelter_id], item_id: params[:item_id])
 		
-		if @shelter_item.update(shelter_item_params)
-			head(201)
+		if @shelter_item.update(inventory: params[:inventory])
+			render json: Shelter.find_by(id: params[:shelter_id])
 		else
 			head(:unprocessable_entity)
 		end
