@@ -1,8 +1,7 @@
 class V1::ItemsController < ApplicationController
 	def index
 		@items = Item.all
-		render json: @items, status: 201
-		end
+		render json: @items
 	end
 
 	def show
@@ -12,8 +11,11 @@ class V1::ItemsController < ApplicationController
 	def create
 		shelter = Shelter.find_by(id: params[:shelter_id])
 		@item = shelter.items.find_or_intialize_by(item_params)
-		shelter.save
-		render json: shelter, status: :created
+		if shelter.save
+			render json: shelter, status: :created
+		else
+			head(:unprocessable_entity)
+		end
 	end
 
 	def update
