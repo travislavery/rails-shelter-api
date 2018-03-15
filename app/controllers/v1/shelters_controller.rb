@@ -9,8 +9,7 @@ class V1::SheltersController < ApplicationController
 	end
 
 	def create
-		@shelter = Shelter.create(shelter_params)
-		
+		@shelter = current_user.shelters.build(shelter_params)
 		@shelter.save
 		render json: @shelter, status: :created
 	end
