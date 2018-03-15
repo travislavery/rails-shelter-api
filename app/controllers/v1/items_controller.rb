@@ -1,16 +1,7 @@
 class V1::ItemsController < ApplicationController
 	def index
-		if params[:shelter_id]
-			shelter = Shelter.find_by(id: params[:shelter_id])
-			if shelter.nil?
-				head(401)
-			else
-				@items = shelter.items
-				render json: @items, status: :ok
-			end
-		else
-			@items = Item.all
-			render json: @items, status: :ok
+		@items = Item.all
+		render json: @items, status: 201
 		end
 	end
 
@@ -20,8 +11,8 @@ class V1::ItemsController < ApplicationController
 
 	def create
 		shelter = Shelter.find_by(id: params[:shelter_id])
-		@item = shelter.items.build(params(item_params))
-		@item.save
+		@item = shelter.items.find_or_intialize_by(item_params)
+		shelter.save
 		render json: shelter, status: :created
 	end
 
