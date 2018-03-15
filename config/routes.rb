@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 	resource :sessions, only: [:create, :destroy]
 	resources :shelter_items
     resources :items
-	resources :shelters
+	resources :shelters do
+		resources :items, only: [:index]
+	end
   end
 end
