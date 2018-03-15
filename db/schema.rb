@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314221403) do
+ActiveRecord::Schema.define(version: 20180315031647) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180314221403) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "image", default: "http://a57.foxnews.com/images.foxnews.com/content/fox-news/lifestyle/2017/11/09/how-to-keep-cat-from-scratching-your-sofa-to-shreds/_jcr_content/par/featured_image/media-0.img.jpg/931/524/1510172827500.jpg?ve=1&tl=1&text=big-top-image"
   end
 
   create_table "users", force: :cascade do |t|

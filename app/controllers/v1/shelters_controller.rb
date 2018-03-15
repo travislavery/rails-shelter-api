@@ -32,6 +32,6 @@ class V1::SheltersController < ApplicationController
 	private
 
 	def shelter_params
-		params.require(:shelter).permit(:name, :address, :phone_number)
+		params.require(:shelter).permit(:name, :address, :phone_number, :image)
 	end
 end
