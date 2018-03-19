@@ -1,7 +1,7 @@
 class V1::SheltersController < ApplicationController
 	def index
 		@shelters = Shelter.all
-		render json: @shelters, include: 'items,shelter_items'
+		render json: @shelters
 	end
 
 	def show
