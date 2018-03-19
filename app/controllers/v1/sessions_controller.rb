@@ -1,8 +1,7 @@
 class V1::SessionsController < ApplicationController
 	def create
-		user = User.where(email: params[:email]).first
-
-		if user&.valid_password?(params[:password])
+		user = current_user || User.where(email: params[:email]).first
+		if user&.valid_password?(params[:password]) || current_user
 			render json: user, status: 201
 		else 
 			#render json: user
