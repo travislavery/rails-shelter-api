@@ -9,23 +9,35 @@ class V1::SheltersController < ApplicationController
 	end
 
 	def create
-		@shelter = current_user.shelters.build(shelter_params)
-		@shelter.save
-		render json: @shelter, status: :created
+		if current_user
+			@shelter = current_user.shelters.build(shelter_params)
+			@shelter.save
+			render json: @shelter, status: :created
+		else
+			render json: {errors: 'Must be logged in to create a shelter'}, status: 401
+		end
 	end
 
 	def update
 		@shelter = Shelter.find(params[:id])
-		@shelter.update(shelter_params)
-		render json: @shelter, status: :ok
+		if @shelter.user == current_user
+			@shelter.update(shelter_params)
+			render json: @shelter, status: :ok
+		else
+			render json: {errors: 'Unauthorized to edit'}, status: 401
+		end
 	end
 
 	def destroy
 		@shelter = Shelter.find(params[:id])
-		if @shelter.destroy
-			head(:ok)
+		if @shelter.user == current_user
+			if @shelter.destroy
+				head(:ok)
+			else
+				render json: {errors: 'Unable to find'}, status: 404
+			end
 		else
-			head(:unprocessable_entity)
+			render json: {errors: 'Unauthorized to delete'}, status: 401
 		end
 	end
 

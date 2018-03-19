@@ -1,11 +1,9 @@
 class V1::UsersController < ApplicationController
 	def create
-		@user = User.create(user_params)
-
-		if @user.save
+		if @user = User.create(user_params)
 			render json: @user, status: 201
 		else 
-			render json: @user.errors, status: 202
+			render json: {errors: "Unable to sign up, try again."}, status: 403
 		end
 	end
 
