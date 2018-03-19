@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 	resources :shelter_items
     resources :items
 	resources :shelters do
-		resources :items, only: [:index]
+		resources :items, only: [:index, :create]
 	end
   end
 end

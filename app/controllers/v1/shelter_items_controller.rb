@@ -9,6 +9,17 @@ class V1::ShelterItemsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@shelter_item = ShelterItem.find_by(id: params[:id])
+		if @shelter_item
+			@shelter = Shelter.find_by(id: @shelter_item.shelter.id)
+			@shelter_item.destroy
+			render json: @shelter
+		else
+			head(:unprocessable_entity)
+		end
+	end
+
 	private
 
 	def shelter_item_params

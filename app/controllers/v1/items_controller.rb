@@ -10,11 +10,13 @@ class V1::ItemsController < ApplicationController
 
 	def create
 		shelter = Shelter.find_by(id: params[:shelter_id])
-		@item = shelter.items.find_or_intialize_by(item_params)
+		@item = Item.find_or_initialize_by(item_params)
+		shelter.items << @item
 		if shelter.save
 			render json: shelter, status: :created
 		else
-			head(:unprocessable_entity)
+			render json: shelter.errors
+			#head(:unprocessable_entity)
 		end
 	end
 

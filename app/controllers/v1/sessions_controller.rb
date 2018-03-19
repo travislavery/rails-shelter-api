@@ -5,6 +5,7 @@ class V1::SessionsController < ApplicationController
 		if user&.valid_password?(params[:password])
 			render json: user, status: 201
 		else 
+			#render json: user
 			head(:unauthorized)
 		end
 	end
