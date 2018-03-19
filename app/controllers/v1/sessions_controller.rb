@@ -4,8 +4,7 @@ class V1::SessionsController < ApplicationController
 		if user&.valid_password?(params[:password]) || current_user
 			render json: user, status: 201
 		else 
-			#render json: user
-			head(:unauthorized)
+			render json: {errors: "Error logging in, please try again."}, status: 401
 		end
 	end
 
