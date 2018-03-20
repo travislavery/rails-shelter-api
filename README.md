@@ -8,3 +8,6 @@ This is an API that is intended to be used to support https://github.com/travisl
 - Run bundle install
 - Run rails s -p 4000
 - If you want the React-Redux front end that this API supports, follow the instructions to install it at https://github.com/travislavery/shelter-app
+
+## License
+https://creativecommons.org/licenses/by/4.0/legalcode
