@@ -9,14 +9,19 @@ class V1::ItemsController < ApplicationController
 	end
 
 	def create
+		
 		shelter = Shelter.find_by(id: params[:shelter_id])
-		@item = Item.find_or_initialize_by(item_params)
-		shelter.items << @item
-		if shelter.save
-			render json: shelter, status: :created
+		if current_user.id == shelter.user.id
+			@item = Item.find_or_initialize_by(item_params)
+			shelter.items << @item
+			if shelter.save
+				render json: shelter, status: :created
+			else
+				render json: {errors: "Improper syntax, try again."}, status: 400
+				#head(:unprocessable_entity)
+			end
 		else
-			render json: shelter.errors
-			#head(:unprocessable_entity)
+			render json: {errors: "Unauthorized"}, status: 401
 		end
 	end
 
@@ -28,10 +33,13 @@ class V1::ItemsController < ApplicationController
 
 	def destroy
 		@item = Item.find(params[:id])
-		if @item.destroy
-			head(:ok)
-		else
-			head(:unprocessable_entity)
+		shelter = @item.shelter
+		if shelter.user.id == current_user.id
+			if @item.destroy
+				head(:ok)
+			else
+				head(:unprocessable_entity)
+			end
 		end
 	end
 

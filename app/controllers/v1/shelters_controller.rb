@@ -20,7 +20,7 @@ class V1::SheltersController < ApplicationController
 
 	def update
 		@shelter = Shelter.find(params[:id])
-		if @shelter.user == current_user
+		if @shelter.user.id == current_user.id
 			@shelter.update(shelter_params)
 			render json: @shelter, status: :ok
 		else
