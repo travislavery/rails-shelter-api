@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 	
+  resources :item_groups
   devise_for :users
   namespace :v1 do 
   	resources :users, only: [:create]
