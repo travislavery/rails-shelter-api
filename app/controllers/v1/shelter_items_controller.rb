@@ -17,11 +17,7 @@ class V1::ShelterItemsController < ApplicationController
 		@shelter_item = ShelterItem.find_by(id: params[:id])
 		if @shelter_item&.shelter.user.id == current_user.id
 			@shelter = Shelter.find_by(id: @shelter_item.shelter.id)
-			item = Item.find_by(id: @shelter_item.item_id)
 			@shelter_item.destroy
-			if item.shelters.length < 1
-				item.destroy
-			end
 			render json: @shelter
 		else
 			render json: {errors: "Unauthorized"}, status: 401

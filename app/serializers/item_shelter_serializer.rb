@@ -1,3 +1,3 @@
 class ItemShelterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description
+  attributes :id, :group_name, :description
 end
