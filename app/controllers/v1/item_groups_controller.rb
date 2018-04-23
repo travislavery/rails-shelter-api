@@ -1,4 +1,4 @@
-class ItemGroupsController < ApplicationController
+class V1::ItemGroupsController < ApplicationController
 	def index
 		@itemGroups = ItemGroup.all
 		render json: @itemGroups

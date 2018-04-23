@@ -46,15 +46,19 @@ shelters = Shelter.create([{
 itemNames = ["Shoes", "Shirts", "Pants", "Food"]
 itemDescriptions = ["Mens", "Womens", "Jeans", "Canned Beans", "Canned Soup"]
 
+itemGroups = itemNames.map do |iname|
+	ItemGroup.create(name: iname)
+end
+
 items = Item.create([
-	{name: itemNames[0], description: itemDescriptions[0]},
-	{name: itemNames[0], description: itemDescriptions[1]},
-	{name: itemNames[1], description: itemDescriptions[0]},
-	{name: itemNames[1], description: itemDescriptions[1]},
-	{name: itemNames[2], description: itemDescriptions[1]},
-	{name: itemNames[2], description: itemDescriptions[0]},
-	{name: itemNames[3], description: itemDescriptions[3]},
-	{name: itemNames[3], description: itemDescriptions[4]},
+	{group_name: itemNames[0], description: itemDescriptions[0], item_group_id: 1},
+	{group_name: itemNames[0], description: itemDescriptions[1], item_group_id: 1},
+	{group_name: itemNames[1], description: itemDescriptions[0], item_group_id: 2},
+	{group_name: itemNames[1], description: itemDescriptions[1], item_group_id: 2},
+	{group_name: itemNames[2], description: itemDescriptions[1], item_group_id: 3},
+	{group_name: itemNames[2], description: itemDescriptions[0], item_group_id: 3},
+	{group_name: itemNames[3], description: itemDescriptions[3], item_group_id: 4},
+	{group_name: itemNames[3], description: itemDescriptions[4], item_group_id: 4},
 	])
 Shelter.all.each do |shelter|
 	Faker::Number.between(2,3).times do
