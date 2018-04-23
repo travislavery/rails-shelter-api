@@ -1,4 +1,4 @@
 class ItemGroup < ApplicationRecord
 	has_many :items
-	validates :group_name, presence: true
+	validates :name, presence: true
 end
